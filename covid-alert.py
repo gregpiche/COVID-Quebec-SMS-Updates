@@ -67,7 +67,6 @@ bod = ("Quebec COVID-19 stats for " + date + ":\n"
     + "Deaths: " + data[2].text + "\n" 
     + "Hospitalizations: " + data[3].text + "\n" 
     + "ICU: " + data[4].text + "\n" 
-    + "Tests performed: " + data[5].text + "\n"  
     + "Doses of vaccine: " + data[6].text + "\n")
 
 print(bod)
