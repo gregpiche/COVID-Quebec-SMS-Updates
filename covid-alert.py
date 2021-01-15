@@ -89,14 +89,14 @@ while(element == None and count != 5):
 if count >= 5:
     print("Max refresh vaccine data!")
 
-table2 = driver.find_element_by_class_name("contenttable")
-vaccineStats = table2.find_elements_by_tag_name('tr')
-vaccinesAdmin = vaccineStats[1].find_element_by_tag_name('p')
+#table2 = driver.find_element_by_class_name("contenttable")
+#vaccineStats = table2.find_elements_by_tag_name('tr')
+#vaccinesAdmin = vaccineStats[1].find_element_by_tag_name('p')
 
 #for ele in vaccineStats:
 #    print(ele.text)
 
-bod = bod + ("Doses of vaccine: " + vaccinesAdmin.text + "\n")
+#bod = bod + ("Doses of vaccine: " + vaccinesAdmin.text + "\n")
 
 print(bod)
 driver.close()
