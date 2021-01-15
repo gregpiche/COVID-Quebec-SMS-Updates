@@ -40,6 +40,10 @@ def suffix(d):
 def custom_strftime(format, t):
     return t.strftime(format).replace('{S}', str(t.day) + suffix(t.day))
 
+# Get data with proper format
+date = custom_strftime('%B {S}, %Y', datetime.now())
+
+# Get general data
 element = None
 count = 0
 while(element == None and count != 5):
@@ -52,22 +56,47 @@ while(element == None and count != 5):
         driver.refresh()
 
 if count >= 5:
-    print("Max refresh!")
+    print("Max refresh general data!")
 
-table = driver.find_element_by_id("c67129")
-dailyStats = table.find_elements_by_tag_name('tr')
+
+table1 = driver.find_element_by_id("c67129")
+dailyStats = table1.find_elements_by_tag_name('tr')
 data = dailyStats[-1].find_elements_by_tag_name('td')
 
-date = custom_strftime('%B {S}, %Y', datetime.now())
-
-#print(table.get_attribute('innerHTML'))
-
+# Create body message
 bod = ("Quebec COVID-19 stats for " + date + ":\n" 
     + "Confirmed cases: " + data[1].text + "\n" 
     + "Deaths: " + data[2].text + "\n" 
     + "Hospitalizations: " + data[3].text + "\n" 
-    + "ICU: " + data[4].text + "\n" 
-    + "Doses of vaccine: " + data[6].text + "\n")
+    + "ICU: " + data[4].text + "\n")
+
+#for ele in data:
+#    print(ele.text)
+
+# Get Vaccine Data
+driver.get("https://www.quebec.ca/en/health/health-issues/a-z/2019-coronavirus/situation-coronavirus-in-quebec/covid-19-vaccination-data/")
+element = None
+count = 0
+while(element == None and count != 5):
+    try:
+        element = WebDriverWait(driver, 5).until(
+        EC.presence_of_element_located((By.CLASS_NAME, "contenttable"))
+        )
+    except TimeoutException:
+        count += 1
+        driver.refresh()
+
+if count >= 5:
+    print("Max refresh vaccine data!")
+
+table2 = driver.find_element_by_class_name("contenttable")
+vaccineStats = table2.find_elements_by_tag_name('tr')
+vaccinesAdmin = vaccineStats[1].find_element_by_tag_name('p')
+
+#for ele in vaccineStats:
+#    print(ele.text)
+
+bod = bod + ("Doses of vaccine: " + vaccinesAdmin.text + "\n")
 
 print(bod)
 driver.close()
