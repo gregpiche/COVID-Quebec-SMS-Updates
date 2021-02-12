@@ -68,35 +68,11 @@ bod = ("Quebec COVID-19 stats for " + date + ":\n"
     + "Confirmed cases: " + data[1].text + "\n" 
     + "Deaths: " + data[2].text + "\n" 
     + "Hospitalizations: " + data[3].text + "\n" 
-    + "ICU: " + data[4].text + "\n")
-
-#for ele in data:
-#    print(ele.text)
-
-# Get Vaccine Data
-driver.get("https://www.quebec.ca/en/health/health-issues/a-z/2019-coronavirus/situation-coronavirus-in-quebec/covid-19-vaccination-data/")
-element = None
-count = 0
-while(element == None and count != 5):
-    try:
-        element = WebDriverWait(driver, 5).until(
-        EC.presence_of_element_located((By.CLASS_NAME, "contenttable"))
-        )
-    except TimeoutException:
-        count += 1
-        driver.refresh()
-
-if count >= 5:
-    print("Max refresh vaccine data!")
-
-#table2 = driver.find_element_by_class_name("contenttable")
-#vaccineStats = table2.find_elements_by_tag_name('tr')
-#vaccinesAdmin = vaccineStats[1].find_element_by_tag_name('p')
+    + "ICU: " + data[4].text + "\n"
+    + "Doses of Vaccine: " + data[6])
 
 #for ele in vaccineStats:
 #    print(ele.text)
-
-#bod = bod + ("Doses of vaccine: " + vaccinesAdmin.text + "\n")
 
 print(bod)
 driver.close()
