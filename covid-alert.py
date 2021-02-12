@@ -69,7 +69,7 @@ bod = ("Quebec COVID-19 stats for " + date + ":\n"
     + "Deaths: " + data[2].text + "\n" 
     + "Hospitalizations: " + data[3].text + "\n" 
     + "ICU: " + data[4].text + "\n"
-    + "Doses of Vaccine: " + data[6])
+    + "Doses of Vaccine: " + data[6].text)
 
 #for ele in vaccineStats:
 #    print(ele.text)
